@@ -5,6 +5,7 @@ NPM         : 2206082410
 Kelas       : PBP C
 
 [Tugas 7](#tugas-7)
+
 [Tugas 8](#tugas-8)
 
 # Tugas 7
@@ -327,7 +328,7 @@ SizedBox(
   ),
 )
 ```
-Untuk *layout-layout* lainnya, dapat dilihat pada link berikut : [Flutter Layout Widgets](https://docs.flutter.dev/ui/widgets/layout?gclid=EAIaIQobChMIlOX0sea-ggMViatmAh1iIwnyEAAYASAAEgLTIfD_BwE&gclsrc=aw.ds)
+Referensi *layout-layout* lainnya: [Flutter Layout Widgets](https://docs.flutter.dev/ui/widgets/layout?gclid=EAIaIQobChMIlOX0sea-ggMViatmAh1iIwnyEAAYASAAEgLTIfD_BwE&gclsrc=aw.ds)
 
 ## Element input yang digunakan pada form
 ### TextField
@@ -506,7 +507,7 @@ Untuk dapat mengimplementasikan *clean architechture* pada flutter, kita perlu m
 
 <img src = "https://miro.medium.com/v2/resize:fit:720/format:webp/1*Jb732hyzBjhCd1ihu23-bQ.png" >
 
-referensi: [Clean Architecture in Flutter](https://medium.com/@samra.sajjad0001/flutter-clean-architecture-5de5e9b8d093)
+Referensi: [Clean Architecture in Flutter](https://medium.com/@samra.sajjad0001/flutter-clean-architecture-5de5e9b8d093)
 
 ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step!
 1. Membuat file left_drawer.dart sebagai widget untuk navigasi.
