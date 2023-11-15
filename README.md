@@ -5,6 +5,7 @@ NPM         : 2206082410
 Kelas       : PBP C
 
 [Tugas 7](#tugas-7)
+[Tugas 8](#tugas-8)
 
 # Tugas 7
 
@@ -193,3 +194,323 @@ class ShopCard extends StatelessWidget {
 }
 ```
 11. Pastikan proyek dapat berjalan dan tombol yang keluar sesuai dengan kode.
+
+# Tugas 8
+
+## Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement(), disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!
+
+### Navigator.push()
+Digunakan untuk menambahkan halaman baru ke dalam *stack* halaman. Halaman baru ditambahkan di atas halaman saat ini. Halaman saat ini tetap ada di dalam *stack* dan dapat diakses kembali dengan menekan tombol kembali.
+
+### Navigator.pushReplacement()
+Digunakan untuk mengganti halaman saat ini dengan halaman baru. Halaman saat ini dihapus dari *stack* dan tidak dapat diakses kembali dengan menekan tombol kembali.
+
+### Contoh penggunaan
+#### Navigator.push()
+```dart
+Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => MyHomePage()),
+);
+```
+#### Navigator.pushReplacement()
+```dart
+Navigator.pushReplacement(
+  context,
+  MaterialPageRoute(builder: (context) => MyHomePage()),
+);
+```
+## Jelaskan masing-masing layout widget pada Flutter dan konteks penggunaannya masing-masing
+### *Container*
+*Container* adalah widget yang digunakan untuk mengatur tata letak dan mengatur *style* elemen lainnya. Ini dapat digunakan untuk menentukan batas, padding, warna latar, dan sebagainya.
+Contoh penggunaan:
+```dart
+Container(
+  margin: EdgeInsets.all(16.0),
+  padding: EdgeInsets.all(8.0),
+  decoration: BoxDecoration(
+    color: Colors.indigo[900],
+    borderRadius: BorderRadius.circular(8.0),
+  ),
+  child: Text('Hello, User!'),
+)
+```
+### *Row* dan *Column*
+Digunakan untuk mengatur elemen-elemen secara horizontal (*Row*) atau vertikal (*Column*). Berguna ketika ingin menyusun atau mengatur letak widget.
+Contoh penggunaan:
+```dart
+Row(
+  children: [
+    Icon(Icons.star),
+    Text('5.0'),
+  ],
+)
+Column(
+  children: [
+    Text('Title'),
+    Text('Subtitle'),
+  ],
+)
+```
+### *Listview*
+*Listview* digunakan untuk membuat daftar *scrollable list* dari widget yang dapat di-*scroll*. Berguna ketika ingin menampilkan data dalam jumlah besar.
+Contoh penggunaan:
+```dart
+ListView(
+  children: [
+    ListTile(
+      title: Text('Item 1'),
+    ),
+    ListTile(
+      title: Text('Item 2'),
+    ),
+  ],
+)
+```
+### *Expanded* dan *Flexible*
+Kedua widget tersebut digunakan untuk memberikan widget keleluasaan dalam mengisi ruang tersedia. Digunakan dalam *Row, Column,* atau *Flex*.
+Contoh penggunaan:
+```dart
+Column(
+  children: [
+    Text('Fixed Height'),
+    Expanded(
+      child: Container(
+        color: Colors.blue,
+      ),
+    ),
+    Text('Fixed Height'),
+  ],
+)
+```
+### *Stack*
+*Stack* digunakan untuk menumpuk widget di atas satu sama lain. Berfungsi saat ingin menempatkan beberapa widget di lokasi yang sama.
+Contoh penggunaan:
+```dart
+Stack(
+  children: [
+    Positioned(
+      top: 10.0,
+      left: 10.0,
+      child: Text('Top Left'),
+    ),
+    Positioned(
+      bottom: 10.0,
+      right: 10.0,
+      child: Text('Bottom Right'),
+    ),
+  ],
+)
+```
+### *Gridview*
+*Gridview* digunakan untuk menampilkan widget dalam susunan kolom dan baris. Berguna untuk menampilkan data dalam bentuk *grid*.
+Contoh penggunaan:
+```dart
+GridView.count(
+  primary: true,
+  padding: const EdgeInsets.all(20),
+  crossAxisSpacing: 10,
+  mainAxisSpacing: 10,
+  crossAxisCount: 3,
+  shrinkWrap: true,
+),
+```
+### *SizedBox*
+*SizedBox* digunakan untuk memberikan dimensi tetap pada suatu widget atau untuk membuat ruang kosong.
+```dart
+SizedBox(
+  width: 100.0,
+  height: 50.0,
+  child: RaisedButton(
+    onPressed: () {},
+    child: Text('Button'),
+  ),
+)
+```
+Untuk *layout-layout* lainnya, dapat dilihat pada link berikut : [Flutter Layout Widgets](https://docs.flutter.dev/ui/widgets/layout?gclid=EAIaIQobChMIlOX0sea-ggMViatmAh1iIwnyEAAYASAAEgLTIfD_BwE&gclsrc=aw.ds)
+
+## Element input yang digunakan pada form
+### TextField
+Digunakan untuk memasukkan teks yang pendek, seperti nama produk, harga, jumlah barang, dan deskripsi barang. Contoh penggunaan:
+```dart
+TextFormField(
+  decoration: InputDecoration(
+    hintText: "Nama Produk",
+    labelText: "Nama Produk",
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(5.0),
+    ),
+  ),
+  onChanged: (String? value) {
+    setState(() {
+      _name = value!;
+    });
+  },
+  validator: (String? value) {
+    if (value == null || value.isEmpty) {
+      return "Nama tidak boleh kosong!";
+    }
+    return null;
+  },
+),
+TextFormField(
+  decoration: InputDecoration(
+    hintText: "Harga",
+    labelText: "Harga",
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(5.0),
+    ),
+  ),
+  // TODO: Tambahkan variabel yang sesuai
+  onChanged: (String? value) {
+    setState(() {
+      _price = int.parse(value!);
+    });
+  },
+  validator: (String? value) {
+    if (value == null || value.isEmpty) {
+      return "Harga tidak boleh kosong!";
+    }
+    if (int.tryParse(value) == null) {
+      return "Harga harus berupa angka!";
+    }
+    return null;
+  },
+),
+TextFormField(
+  decoration: InputDecoration(
+    hintText: "Jumlah barang",
+    labelText: "Jumlah barang",
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(5.0),
+    ),
+  ),
+  // TODO: Tambahkan variabel yang sesuai
+  onChanged: (String? value) {
+    setState(() {
+      _amount = int.parse(value!);
+    });
+  },
+  validator: (String? value) {
+    if (value == null || value.isEmpty) {
+      return "Jumlah barang tidak boleh kosong!";
+    }
+    if (int.tryParse(value) == null) {
+      return "Jumlah barang harus berupa angka!";
+    }
+    return null;
+  },
+),
+TextFormField(
+              decoration: InputDecoration(
+                hintText: "Deskripsi",
+                labelText: "Deskripsi",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+              ),
+              onChanged: (String? value) {
+                setState(() {
+                  // TODO: Tambahkan variabel yang sesuai
+                  _description = value!;
+                });
+              },
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return "Deskripsi tidak boleh kosong!";
+                }
+                return null;
+              },
+            ),
+```
+### ElevatedButton
+Digunakan untuk menambahkan tombol yang dapat diklik untuk menambahkan produk baru. Contoh penggunaan:
+```dart
+ElevatedButton(
+  style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all(Colors.amber),
+  ),
+  onPressed: () {
+    if (_formKey.currentState!.validate()) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Produk berhasil tersimpan'),
+            content: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Nama: $_name'),
+                  Text('Harga: $_price'),
+                  Text('Jumlah: $_amount'),
+                  Text('Desc: $_description'),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        },
+      );
+      _formKey.currentState!.reset();
+    }
+  },
+  child: const Text(
+    "Save",
+    style: TextStyle(color: Colors.white),
+  ),
+),
+```
+### AlertDialog
+Digunakan untuk menampilkan dialog yang berisi informasi produk yang telah disimpan. Contoh penggunaan:
+```dart
+AlertDialog(
+  title: const Text('Produk berhasil tersimpan'),
+  content: SingleChildScrollView(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Nama: $_name'),
+        Text('Harga: $_price'),
+        Text('Jumlah: $_amount'),
+        Text('Desc: $_description'),
+      ],
+    ),
+  ),
+  actions: [
+    TextButton(
+      child: const Text('OK'),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    ),
+  ],
+);
+```
+
+### Implementasi Clean Architecture pada Flutter
+Clean architecture adalah sebuah konsep yang membagi kode menjadi beberapa layer. Setiap layer memiliki tanggung jawab yang berbeda-beda. Layer-layer tersebut adalah:
+- Entities: layer yang berisi model dan business logic.
+- Presentation layer: layer yang berisi UI dan business logic.
+- Domain layer: layer yang berisi logika utama dari business proses, mengandung use case, entities, dan business rules.
+- Data layer: layer yang berperan dalam mengambil dan menyimpan data.
+
+Untuk dapat mengimplementasikan *clean architechture* pada flutter, kita perlu menggunakan beberapa folder dan packages untuk mengelola kode - kode tersebut. Berikut merupakan diagramnya:
+
+<img src = "https://miro.medium.com/v2/resize:fit:720/format:webp/1*Jb732hyzBjhCd1ihu23-bQ.png" >
+
+referensi: [Clean Architecture in Flutter](https://medium.com/@samra.sajjad0001/flutter-clean-architecture-5de5e9b8d093)
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step!
+1. Membuat file left_drawer.dart sebagai widget untuk navigasi.
+2. Membuat form dan input untuk user memasukkan barang
+3. Menyimpan dan menampilkan hasil input user
+4. Menambahkan navigasi untuk berpindah halaman pada button
+5. Merapihkan struktur dokumen dengan refactoring
