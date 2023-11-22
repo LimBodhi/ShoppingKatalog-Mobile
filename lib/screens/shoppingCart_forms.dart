@@ -153,30 +153,32 @@ class _ShopFormPageState extends State<ShopFormPage> {
                         // Kirim ke Django dan tunggu respons
                         // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                         final response = await request.postJson(
+                        //https://lim-bodhi-tugas.pbp.cs.ui.ac.id/create-flutter/
                         "http://127.0.0.1:8000/create-flutter/",
                         jsonEncode(<String, String>{
                             'name': _name,
                             'price': _price.toString(),
+                            'amount': _amount.toString(),
                             'description': _description,
                             // TODO: Sesuaikan field data sesuai dengan aplikasimu
                         }));
-                        if (response['status'] == 'success') {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                            content: Text("Produk baru berhasil disimpan!"),
-                            ));
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (context) => MyHomePage()),
-                            );
-                        } else {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                                content:
-                                    Text("Terdapat kesalahan, silakan coba lagi."),
-                            ));
-                        }
-                    }
+                         if (response['status'] == 'success') {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                              content: Text("Produk baru berhasil disimpan!"),
+                              ));
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => MyHomePage()),
+                              );
+                          } else {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                  content:
+                                      Text("Terdapat kesalahan, silakan coba lagi."),
+                              ));
+                          }
+                  }
                 },
                 child: const Text(
                   "Save",

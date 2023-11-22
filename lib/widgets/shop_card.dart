@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_catalog_mobile/screens/list_product.dart';
-import 'package:shopping_catalog_mobile/screens/menu.dart';
 import 'package:shopping_catalog_mobile/screens/shoppingCart_forms.dart';
-import 'package:shopping_catalog_mobile/widgets/left_drawer.dart';
 
 class ShopItem {
   final String name;
@@ -15,7 +13,7 @@ class ShopItem {
 class ShopCard extends StatelessWidget {
   final ShopItem item;
 
-  const ShopCard(this.item, {Key? key}) : super(key: key);
+  const ShopCard(this.item, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +29,9 @@ class ShopCard extends StatelessWidget {
             // TODO: Gunakan Navigator.push untuk melakukan navigasi ke MaterialPageRoute yang mencakup ShopFormPage.
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ShopFormPage()),
+              MaterialPageRoute(builder: (context) => const ShopFormPage()),
             );
-          } else if (item.name == "Lihat Produk") {
+          } else if (item.name == "Lihat Item") {
               Navigator.push(context,
               MaterialPageRoute(builder: (context) => const ProductPage()));
           }

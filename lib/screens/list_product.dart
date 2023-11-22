@@ -5,7 +5,7 @@ import 'package:shopping_catalog_mobile/models/product.dart';
 import 'package:shopping_catalog_mobile/widgets/left_drawer.dart';
 
 class ProductPage extends StatefulWidget {
-    const ProductPage({Key? key}) : super(key: key);
+    const ProductPage({super.key});
 
     @override
     _ProductPageState createState() => _ProductPageState();
@@ -15,6 +15,7 @@ class _ProductPageState extends State<ProductPage> {
 Future<List<Product>> fetchProduct() async {
     // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
     var url = Uri.parse(
+      //https://lim-bodhi-tugas.pbp.cs.ui.ac.id/json/
         'http://127.0.0.1:8000/json/');
     var response = await http.get(
         url,
@@ -25,19 +26,20 @@ Future<List<Product>> fetchProduct() async {
     var data = jsonDecode(utf8.decode(response.bodyBytes));
 
     // melakukan konversi data json menjadi object Product
-    List<Product> list_product = [];
+    List<Product> listProduct = [];
     for (var d in data) {
         if (d != null) {
-            list_product.add(Product.fromJson(d));
+            listProduct.add(Product.fromJson(d));
         }
     }
-    return list_product;
+    return listProduct;
 }
 
 @override
 Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+        backgroundColor: Colors.amber.shade200,
         title: const Text('Product'),
         ),
         drawer: const LeftDrawer(),
@@ -78,6 +80,8 @@ Widget build(BuildContext context) {
                                     ),
                                     const SizedBox(height: 10),
                                     Text("${snapshot.data![index].fields.price}"),
+                                    const SizedBox(height: 10),
+                                    Text("${snapshot.data![index].fields.amount}"),
                                     const SizedBox(height: 10),
                                     Text(
                                         "${snapshot.data![index].fields.description}")
